@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TenderConnect — Case Study · Marcelle Govender</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal:#163A43;--teal-mid:#486A73;--teal-light:#6A8E97;
+  --coral:#E58B8B;--peach:#F4D6CC;--cream:#F7F3EF;--cream-dark:#EDE6DF;
+  --charcoal:#1F1F1F;--grey:#6B7280;--white:#FFFFFF;
+  --radius-lg:20px;--radius-md:12px;--radius-sm:8px;
+  --shadow-sm:0 2px 12px rgba(22,58,67,.07);
+  --shadow-md:0 8px 32px rgba(22,58,67,.10);
+  --shadow-lg:0 20px 60px rgba(22,58,67,.15);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--charcoal);background:var(--white);line-height:1.6}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV ── */
+.case-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 2.5rem;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--cream-dark);
+}
+.back-btn{display:inline-flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:600;color:var(--teal-mid);transition:color .2s;cursor:pointer}
+.back-btn:hover{color:var(--teal)}
+.back-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.nav-title{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--teal);font-weight:600}
+.nav-cta{font-size:.78rem;font-weight:600;padding:.45rem 1.1rem;border-radius:50px;background:var(--teal);color:var(--white);transition:background .2s;cursor:pointer}
+.nav-cta:hover{background:var(--teal-mid)}
+
+/* ── HERO ── */
+.case-hero{
+  background:linear-gradient(135deg,var(--teal) 0%,#1e4f5c 60%,#2a6270 100%);
+  color:var(--white);padding:8rem 0 0;overflow:hidden;
+}
+.hero-inner{max-width:1100px;margin:0 auto;padding:0 3rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--peach);margin-bottom:1.5rem}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--coral);display:inline-block}
+.hero-title{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;line-height:1.1;margin-bottom:1.2rem}
+.hero-title em{font-style:italic;color:var(--peach)}
+.hero-subtitle{font-size:1.05rem;font-weight:300;opacity:.82;line-height:1.7;max-width:440px;margin-bottom:2rem}
+.hero-meta{display:flex;flex-wrap:wrap;gap:2rem}
+.hero-meta-item{display:flex;flex-direction:column;gap:.2rem}
+.hero-meta-label{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.55}
+.hero-meta-value{font-size:.9rem;font-weight:500;opacity:.9}
+.hero-image-wrap{display:flex;align-items:flex-end;justify-content:center;padding-bottom:0}
+.hero-screenshot{
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow:0 -8px 40px rgba(0,0,0,.3);
+  transform:translateY(0);
+  width:100%;
+  border:2px solid rgba(255,255,255,.1);
+  border-bottom:none;
+}
+
+/* ── STATS STRIP ── */
+.stats-strip{background:var(--cream);border-bottom:1px solid var(--cream-dark);padding:2rem 3rem}
+.stats-inner{max-width:1100px;margin:0 auto;display:flex;gap:0;align-items:stretch}
+.stat-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:1rem 1.5rem;border-right:1px solid var(--cream-dark)}
+.stat-item:last-child{border-right:none}
+.stat-number{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--teal);line-height:1}
+.stat-label{font-size:.75rem;font-weight:500;color:var(--grey);text-align:center}
+
+/* ── CONTENT LAYOUT ── */
+.content-body{max-width:1100px;margin:0 auto;padding:5rem 3rem}
+.section{margin-bottom:5rem}
+.section-label{
+  font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--teal-mid);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--cream-dark)}
+.section-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--charcoal);margin-bottom:1.2rem;line-height:1.2}
+.section-body{font-size:1rem;color:var(--grey);line-height:1.8;max-width:700px}
+.section-body p+p{margin-top:1rem}
+
+/* ── ROLE OVERVIEW ── */
+.overview-grid{display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start}
+.role-card{background:var(--teal);color:var(--white);border-radius:var(--radius-lg);padding:2rem;display:flex;flex-direction:column;gap:1.5rem}
+.role-card-item{display:flex;flex-direction:column;gap:.3rem}
+.role-card-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.55}
+.role-card-value{font-size:.9rem;font-weight:500}
+.role-card-value.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.2rem}
+.pill{font-size:.72rem;font-weight:600;padding:.25rem .65rem;border-radius:50px;background:rgba(255,255,255,.15);color:var(--white)}
+
+/* ── PROCESS STEPS ── */
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:2rem 0;border:1px solid var(--cream-dark);border-radius:var(--radius-lg);overflow:hidden}
+.process-step{padding:1.5rem 1.2rem;background:var(--white);border-right:1px solid var(--cream-dark);display:flex;flex-direction:column;gap:.5rem;transition:background .2s}
+.process-step:last-child{border-right:none}
+.process-step:hover{background:var(--cream)}
+.step-num{font-size:.65rem;font-weight:700;letter-spacing:.1em;color:var(--teal-mid);text-transform:uppercase}
+.step-name{font-size:.88rem;font-weight:600;color:var(--charcoal)}
+.step-desc{font-size:.75rem;color:var(--grey);line-height:1.5}
+
+/* ── PROBLEM STATEMENT ── */
+.problem-card{background:var(--cream);border-radius:var(--radius-lg);padding:3rem;position:relative;overflow:hidden;margin:2rem 0}
+.problem-card::before{content:'"';font-family:'Playfair Display',serif;font-size:12rem;line-height:1;color:var(--teal);opacity:.07;position:absolute;top:-2rem;left:1rem;font-weight:700}
+.problem-quote{font-family:'Playfair Display',serif;font-size:1.5rem;font-style:italic;color:var(--teal);line-height:1.5;position:relative;z-index:1}
+
+/* ── RESEARCH ── */
+.research-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2rem 0}
+.research-card{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--radius-md);padding:1.75rem;transition:box-shadow .2s}
+.research-card:hover{box-shadow:var(--shadow-md)}
+.research-icon{width:40px;height:40px;border-radius:var(--radius-sm);background:var(--peach);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.research-icon svg{width:20px;height:20px;stroke:var(--teal);fill:none;stroke-width:2}
+.research-card h4{font-size:.92rem;font-weight:600;color:var(--charcoal);margin-bottom:.5rem}
+.research-card p{font-size:.82rem;color:var(--grey);line-height:1.6}
+
+/* ── DESIGN SYSTEM ── */
+.ds-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:2rem 0}
+.ds-colors{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem}
+.color-swatch{width:48px;height:48px;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);cursor:pointer}
+.color-swatch-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem}
+.color-swatch-sm{width:32px;height:32px;border-radius:6px;flex-shrink:0}
+.color-info{display:flex;flex-direction:column;gap:.1rem}
+.color-name{font-size:.8rem;font-weight:600;color:var(--charcoal)}
+.color-hex{font-size:.72rem;color:var(--grey);font-family:monospace}
+.type-sample{margin-top:1rem}
+.type-display{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--teal);line-height:1}
+.type-body{font-size:1rem;color:var(--grey);margin-top:.4rem}
+.type-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-mid);margin-top:1.2rem;margin-bottom:.3rem}
+.ds-card{background:var(--cream);border-radius:var(--radius-md);padding:1.75rem}
+.ds-card h4{font-size:.88rem;font-weight:600;color:var(--charcoal);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--cream-dark)}
+
+/* ── DECISIONS ── */
+.decisions-list{display:flex;flex-direction:column;gap:1.5rem;margin:2rem 0}
+.decision-item{display:grid;grid-template-columns:48px 1fr;gap:1.25rem;align-items:start;padding:1.75rem;border:1px solid var(--cream-dark);border-radius:var(--radius-md);transition:box-shadow .2s}
+.decision-item:hover{box-shadow:var(--shadow-sm)}
+.decision-num{width:48px;height:48px;border-radius:50%;background:var(--teal);color:var(--white);font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.decision-content h4{font-size:.95rem;font-weight:600;color:var(--charcoal);margin-bottom:.4rem}
+.decision-content p{font-size:.85rem;color:var(--grey);line-height:1.7}
+.decision-tag{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-mid);background:var(--peach);padding:.2rem .6rem;border-radius:50px;margin-bottom:.5rem}
+
+/* ── FEATURES ── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin:2rem 0}
+.feature-card{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--radius-md);padding:1.5rem;transition:box-shadow .2s}
+.feature-card:hover{box-shadow:var(--shadow-md);border-color:var(--teal-light)}
+.feature-icon{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--teal);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+.feature-icon svg{width:18px;height:18px;stroke:var(--white);fill:none;stroke-width:2}
+.feature-card h4{font-size:.88rem;font-weight:600;color:var(--charcoal);margin-bottom:.35rem}
+.feature-card p{font-size:.78rem;color:var(--grey);line-height:1.6}
+
+/* ── SCREENSHOT ── */
+.screenshot-showcase{margin:2.5rem 0;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--cream-dark)}
+.screenshot-showcase img{width:100%;display:block}
+.screenshot-caption{background:var(--cream);padding:1rem 1.5rem;font-size:.8rem;color:var(--grey);font-style:italic}
+
+/* ── SCREENS GALLERY ── */
+.screens-gallery{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}
+.screen-frame{border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-md);border:1px solid var(--cream-dark);background:var(--white)}
+.screen-bar{height:36px;background:#f1f3f4;display:flex;align-items:center;padding:0 14px;gap:6px;border-bottom:1px solid var(--cream-dark);flex-shrink:0}
+.screen-dot{width:10px;height:10px;border-radius:50%}
+.screen-dot:nth-child(1){background:#FF5F57}
+.screen-dot:nth-child(2){background:#FEBC2E}
+.screen-dot:nth-child(3){background:#28C840}
+.screen-url{flex:1;height:20px;background:#e8eaed;border-radius:4px;margin:0 8px}
+.screen-frame .screen-scroll{width:100%;height:360px;overflow:hidden;position:relative}
+.screen-frame .screen-scroll img{width:100%;display:block;object-fit:cover;object-position:top 0%;transition:object-position 2.5s ease}
+.screen-frame:hover .screen-scroll img{object-position:top 100%}
+.screen-label{padding:.6rem 1rem;font-size:.75rem;color:var(--grey);font-weight:500;background:var(--cream)}
+.screens-gallery.single .screen-frame{max-width:100%}
+@media(max-width:700px){.screens-gallery{grid-template-columns:1fr}}
+
+/* ── TECH STACK ── */
+.tech-pills{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.5rem 0}
+.tech-pill{font-size:.78rem;font-weight:600;padding:.35rem .85rem;border-radius:50px;background:var(--teal);color:var(--white)}
+.tech-pill.secondary{background:var(--cream-dark);color:var(--teal)}
+
+/* ── REFLECTION ── */
+.reflection-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}
+.reflection-card{border-radius:var(--radius-md);padding:1.75rem}
+.reflection-card.learned{background:linear-gradient(135deg,#EAF2F4 0%,#d5e8ec 100%)}
+.reflection-card.next{background:linear-gradient(135deg,#F7EEE8 0%,#f0ddd4 100%)}
+.reflection-card h4{font-size:.88rem;font-weight:700;color:var(--charcoal);margin-bottom:1rem}
+.reflection-list{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.reflection-list li{font-size:.83rem;color:var(--grey);line-height:1.6;padding-left:1.2rem;position:relative}
+.reflection-list li::before{content:'→';position:absolute;left:0;color:var(--teal-mid);font-weight:600}
+
+/* ── NEXT PROJECT ── */
+.next-project{background:var(--teal);color:var(--white);padding:4rem 3rem;text-align:center;margin-top:5rem}
+.next-label{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;opacity:.6;margin-bottom:.75rem}
+.next-title{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1.5rem}
+.next-btn{display:inline-flex;align-items:center;gap:.6rem;font-weight:600;font-size:.9rem;padding:.8rem 2rem;border-radius:50px;background:var(--white);color:var(--teal);transition:all .2s;cursor:pointer}
+.next-btn:hover{background:var(--peach)}
+.next-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ── HANDWRITING ── */
+.handwrite{font-family:'Caveat',cursive;font-size:1.3rem;color:var(--coral);display:block;margin-top:.5rem}
+
+/* ── RESPONSIVE ── */
+html,body{overflow-x:hidden}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:2rem;padding:0 1.5rem 3rem}
+  .hero-image-wrap{display:none}
+  .hero-title{font-size:2.2rem}
+  .overview-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .ds-grid,.reflection-grid{grid-template-columns:1fr}
+  .features-grid,.research-grid{grid-template-columns:1fr 1fr}
+  .stats-inner{flex-wrap:wrap}
+  .stat-item{min-width:40%;border-right:none;border-bottom:1px solid var(--cream-dark)}
+  .content-body{padding:3rem 1.5rem}
+  .screen-frame .screen-scroll{height:260px}
+  .next-project{padding:3rem 1.5rem}
+}
+@media(max-width:600px){
+  .features-grid,.research-grid,.process-steps{grid-template-columns:1fr}
+  .hero-title{font-size:1.8rem}
+  .case-nav{padding:.7rem 1.2rem}
+  .nav-title{display:none}
+  .content-body{padding:2rem 1.25rem}
+  .section{margin-bottom:3rem}
+  .section-title{font-size:1.5rem}
+  .problem-card{padding:2rem 1.5rem}
+  .problem-quote{font-size:1.15rem}
+  .decision-item{grid-template-columns:36px 1fr;gap:.75rem;padding:1.25rem}
+  .decision-num{width:36px;height:36px;font-size:.9rem}
+  .screen-frame .screen-scroll{height:200px}
+  .screens-gallery{gap:1rem}
+  .hero-meta{gap:1rem}
+  .stats-strip{padding:1.25rem}
+  .stat-item{min-width:45%}
+  .stat-number{font-size:1.7rem}
+  .back-btn span{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* ── LIGHTBOX ── */
+.lb-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);cursor:zoom-out;align-items:center;justify-content:center;padding:1.5rem}
+.lb-overlay.open{display:flex}
+.lb-overlay img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:6px;box-shadow:0 24px 80px rgba(0,0,0,.6);cursor:default}
+.lb-close{position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:#fff;font-size:2rem;line-height:1;cursor:pointer;opacity:.7;transition:opacity .2s}
+.lb-close:hover{opacity:1}
+.screen-scroll{cursor:zoom-in}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="case-nav">
+  <a href="../index.html" class="back-btn">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
+    Back to Portfolio
+  </a>
+  <span class="nav-title">TenderConnect</span>
+  <a href="../index.html#contact" class="nav-cta">Work with me</a>
+</nav>
+
+<!-- HERO -->
+<section class="case-hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag"><span class="hero-tag-dot"></span>UX / UI Design &amp; Frontend Development</div>
+      <h1 class="hero-title">Tender&shy;Connect<em>.</em></h1>
+      <p class="hero-subtitle">A full-stack procurement platform connecting South African businesses to tender opportunities — designed from scratch with a team of six.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Module</span>
+          <span class="hero-meta-value">PROG7314</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Year</span>
+          <span class="hero-meta-value">2025</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Team</span>
+          <span class="hero-meta-value">6 members</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Duration</span>
+          <span class="hero-meta-value">12 weeks</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image-wrap">
+      <img src="../images/tc-home.png" alt="TenderConnect dashboard interface" class="hero-screenshot">
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Core pages designed</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Team members</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">3</span>
+      <span class="stat-label">User types</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">12</span>
+      <span class="stat-label">Weeks end-to-end</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">AI</span>
+      <span class="stat-label">Powered chatbot</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content-body">
+
+  <!-- OVERVIEW -->
+  <section class="section">
+    <div class="section-label">Overview</div>
+    <div class="overview-grid">
+      <div>
+        <h2 class="section-title">My role in this project</h2>
+        <div class="section-body">
+          <p>As both UI/UX Designer and Frontend Developer on this team project, I was responsible for establishing the visual design language, designing key screens in Figma, and building out the frontend — translating our mockups into responsive, functional HTML/CSS/JavaScript pages.</p>
+          <p>I approached every screen with the end-user in mind: how would a procurement officer, a business owner, or a platform admin actually navigate this? That thinking drove both my design decisions and my frontend implementation choices.</p>
+          <span class="handwrite">Design lead + frontend dev</span>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-card-item">
+          <span class="role-card-label">My Role</span>
+          <span class="role-card-value">UI/UX Designer &amp; Frontend Developer</span>
+        </div>
+        <div class="role-card-item">
+          <span class="role-card-label">Type</span>
+          <span class="role-card-value">Full-Stack Campus Group Project</span>
+        </div>
+        <div class="role-card-item">
+          <span class="role-card-label">Design Tools</span>
+          <div class="role-card-value tags">
+            <span class="pill">Figma</span>
+            <span class="pill">Canva</span>
+          </div>
+        </div>
+        <div class="role-card-item">
+          <span class="role-card-label">Frontend Stack</span>
+          <div class="role-card-value tags">
+            <span class="pill">HTML/CSS</span>
+            <span class="pill">JavaScript</span>
+            <span class="pill">Bootstrap</span>
+          </div>
+        </div>
+        <div class="role-card-item">
+          <span class="role-card-label">Backend Stack</span>
+          <div class="role-card-value tags">
+            <span class="pill">C# .NET</span>
+            <span class="pill">SQL Server</span>
+            <span class="pill">AWS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN PROCESS OVERVIEW -->
+  <section class="section">
+    <div class="section-label">Design Process</div>
+    <h2 class="section-title">How we got there</h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <span class="step-num">01</span>
+        <span class="step-name">Discover</span>
+        <span class="step-desc">Research, brief analysis, identifying user types</span>
+      </div>
+      <div class="process-step">
+        <span class="step-num">02</span>
+        <span class="step-name">Define</span>
+        <span class="step-desc">Problem statement, user flows, information architecture</span>
+      </div>
+      <div class="process-step">
+        <span class="step-num">03</span>
+        <span class="step-name">Design</span>
+        <span class="step-desc">Wireframes, design system, high-fidelity screens</span>
+      </div>
+      <div class="process-step">
+        <span class="step-num">04</span>
+        <span class="step-name">Build</span>
+        <span class="step-desc">Frontend implementation, integration with backend</span>
+      </div>
+      <div class="process-step">
+        <span class="step-num">05</span>
+        <span class="step-name">Reflect</span>
+        <span class="step-desc">Lessons learned, what I'd do differently</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="section">
+    <div class="section-label">01 · Discover &amp; Define</div>
+    <h2 class="section-title">The problem we set out to solve</h2>
+    <div class="problem-card">
+      <p class="problem-quote">"Small and medium-sized businesses in South Africa struggle to find, apply for, and track government tender opportunities — the process is fragmented, bureaucratic, and intimidating."</p>
+    </div>
+    <div class="section-body" style="margin-top:1.5rem">
+      <p>Our brief asked us to design and build a procurement platform that makes tendering accessible. From the start, I pushed for us to think beyond just a listings page — real users needed to register their businesses, track application status, communicate with administrators, and get intelligent help navigating the process.</p>
+      <p>I led early discovery sessions with our team, mapping out who would actually use this platform and what their mental models looked like.</p>
+    </div>
+
+    <div class="research-grid" style="margin-top:2rem">
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h4>Three User Types</h4>
+        <p>We identified <strong>Businesses</strong> looking for tenders, <strong>Administrators</strong> managing the platform, and <strong>Public Users</strong> browsing opportunities. Each needed a completely different experience.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <h4>The Complexity Gap</h4>
+        <p>Existing solutions were either government portals (dense, dated) or expensive SaaS tools. We needed to bridge this — powerful enough to be useful, simple enough for first-time users.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h4>Time Pressure</h4>
+        <p>Tender deadlines are strict. Users told us the biggest pain point was missing opportunities because they couldn't track timelines. This became a core design priority.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN SYSTEM -->
+  <section class="section">
+    <div class="section-label">03 · Design</div>
+    <h2 class="section-title">Building the visual language</h2>
+    <div class="section-body">
+      <p>I established the design system before touching any screen layouts. Colour, type, and component decisions made early would ripple through all 9 pages — getting this foundation right was non-negotiable.</p>
+    </div>
+    <div class="ds-grid" style="margin-top:2rem">
+      <div class="ds-card">
+        <h4>TenderConnect Colour Palette</h4>
+        <div class="color-swatch-row">
+          <div class="color-swatch-sm" style="background:#0A1628"></div>
+          <div class="color-info"><span class="color-name">Deep Navy</span><span class="color-hex">#0A1628 — Hero, authority sections</span></div>
+        </div>
+        <div class="color-swatch-row">
+          <div class="color-swatch-sm" style="background:#1A3A4A"></div>
+          <div class="color-info"><span class="color-name">Dark Teal</span><span class="color-hex">#1A3A4A — Navigation, footers</span></div>
+        </div>
+        <div class="color-swatch-row">
+          <div class="color-swatch-sm" style="background:#4DA6B3"></div>
+          <div class="color-info"><span class="color-name">Brand Teal</span><span class="color-hex">#4DA6B3 — Brand accent, highlights</span></div>
+        </div>
+        <div class="color-swatch-row">
+          <div class="color-swatch-sm" style="background:#2D7DD2"></div>
+          <div class="color-info"><span class="color-name">Action Blue</span><span class="color-hex">#2D7DD2 — CTA buttons, links</span></div>
+        </div>
+        <div class="color-swatch-row">
+          <div class="color-swatch-sm" style="background:#F8FAFC;border:1px solid #e5e7eb"></div>
+          <div class="color-info"><span class="color-name">Light Grey</span><span class="color-hex">#F8FAFC — Cards, content sections</span></div>
+        </div>
+      </div>
+      <div class="ds-card">
+        <h4>Typography</h4>
+        <span class="type-label">Display / Headings</span>
+        <div class="type-display">Playfair Display</div>
+        <p style="font-size:.75rem;color:var(--grey);margin-top:.4rem">Serif, authoritative — conveys reliability and professionalism in a government-adjacent context</p>
+        <span class="type-label">Body / UI Labels</span>
+        <div style="font-size:1rem;font-family:'DM Sans',sans-serif;color:var(--charcoal)">DM Sans</div>
+        <p style="font-size:.75rem;color:var(--grey);margin-top:.4rem">Geometric sans-serif, highly readable — ideal for data-dense procurement information</p>
+        <span class="type-label">Type Scale</span>
+        <p style="font-size:.75rem;color:var(--grey)">H1 40px · H2 28px · H3 20px · Body 16px · Label 13px · Caption 11px</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY DESIGN DECISIONS -->
+  <section class="section">
+    <div class="section-label">03 · Design Decisions</div>
+    <h2 class="section-title">Five choices that shaped the product</h2>
+    <div class="section-body">
+      <p>Every design decision was deliberate. Here are the ones I'm most proud of — the moments where UX thinking directly improved the experience.</p>
+    </div>
+    <div class="decisions-list">
+      <div class="decision-item">
+        <div class="decision-num">1</div>
+        <div class="decision-content">
+          <span class="decision-tag">Navigation</span>
+          <h4>Role-based dashboards instead of a single home</h4>
+          <p>Rather than showing all users the same homepage, we designed three distinct authenticated dashboards. A business user sees their tender applications and deadlines. An admin sees pending approvals and platform stats. This made the platform feel personal and reduced cognitive load — users only saw what was relevant to them.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">2</div>
+        <div class="decision-content">
+          <span class="decision-tag">UX Writing</span>
+          <h4>Plain-language status labels with visual hierarchy</h4>
+          <p>Tender statuses like "Pending Evaluation" and "Awarded" needed to be scannable at a glance. I designed colour-coded status pills with short, plain-English labels — removing government jargon that confused users during our team reviews. Green for active, amber for pending, red for closed.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">3</div>
+        <div class="decision-content">
+          <span class="decision-tag">Onboarding</span>
+          <h4>Progressive disclosure in business registration</h4>
+          <p>Registration for a business tender platform requires collecting a lot of information — company details, tax numbers, director info. Rather than presenting one overwhelming form, I broke this into a stepped wizard with a clear progress indicator. Each step had a single focus, reducing drop-off and user anxiety.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">4</div>
+        <div class="decision-content">
+          <span class="decision-tag">AI Integration</span>
+          <h4>Contextual chatbot placement within tender views</h4>
+          <p>We integrated a Gemini AI chatbot to help users understand tender requirements. Rather than a floating chat bubble (easy to ignore), I embedded it contextually in the tender detail sidebar. It appeared where users were most likely to have questions — not as an afterthought.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">5</div>
+        <div class="decision-content">
+          <span class="decision-tag">Admin UX</span>
+          <h4>Bulk action patterns for admin efficiency</h4>
+          <p>Early admin designs had individual action buttons per row. After watching our team simulate admin tasks, I redesigned to include checkbox selection and bulk actions — approve multiple applications, export data sets. This cut the number of clicks for common admin workflows by roughly half.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIREFRAMES -->
+  <section class="section">
+    <div class="section-label">04 · Wireframes</div>
+    <h2 class="section-title">Low-fidelity wireframes</h2>
+    <div class="section-body">
+      <p>Before touching colour or code, I mapped out the core screens as low-fidelity wireframes — focusing purely on layout, hierarchy, and user flow. These grounded the team's decisions and gave us a clear structure to iterate on before moving to high-fidelity design.</p>
+    </div>
+    <div class="screens-gallery">
+      <div class="screen-frame">
+        <div class="screen-bar">
+          <div class="screen-dot"></div><div class="screen-dot"></div><div class="screen-dot"></div>
+          <div class="screen-url"></div>
+        </div>
+        <div class="screen-scroll"><img src="../images/Home.png" alt="Wireframe — TenderConnect homepage layout" loading="lazy"></div>
+        <div class="screen-label">Homepage — Wireframe</div>
+      </div>
+      <div class="screen-frame">
+        <div class="screen-bar">
+          <div class="screen-dot"></div><div class="screen-dot"></div><div class="screen-dot"></div>
+          <div class="screen-url"></div>
+        </div>
+        <div class="screen-scroll"><img src="../images/About%20Us.png" alt="Wireframe — About Us page layout" loading="lazy"></div>
+        <div class="screen-label">About Us — Wireframe</div>
+      </div>
+      <div class="screen-frame">
+        <div class="screen-bar">
+          <div class="screen-dot"></div><div class="screen-dot"></div><div class="screen-dot"></div>
+          <div class="screen-url"></div>
+        </div>
+        <div class="screen-scroll"><img src="../images/Tender%20List.png" alt="Wireframe — Tender List page layout" loading="lazy"></div>
+        <div class="screen-label">Tender List — Wireframe</div>
+      </div>
+      <div class="screen-frame">
+        <div class="screen-bar">
+          <div class="screen-dot"></div><div class="screen-dot"></div><div class="screen-dot"></div>
+          <div class="screen-url"></div>
+        </div>
+        <div class="screen-scroll"><img src="../images/Profile.png" alt="Wireframe — User Profile page layout" loading="lazy"></div>
+        <div class="screen-label">Profile — Wireframe</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROTOTYPE GALLERY -->
+  <section class="section">
+    <div class="section-label">05 · Prototype</div>
+    <h2 class="section-title">High-fidelity prototype</h2>
+    <div class="section-body">
+      <p>After wireframes were signed off, I applied the full design system — brand colours, typography, iconography, and real content — to produce the high-fidelity prototype. These screens went directly into the React build.</p>
+    </div>
+    <div class="screens-gallery">
+      <div class="screen-frame">
+        <div class="screen-bar">
+          <div class="screen-dot"></div><div class="screen-dot"></div><div class="screen-dot"></div>
+          <div class="screen-url"></div>
+        </div>
+        <div class="screen-scroll"><img src="../images/Home%20%281%29.png" alt="TenderConnect home page hi-fi prototype" loading="lazy"></div>
+        <div class="screen-label">Homepage — Prototype</div>
+      </div>
+      <div class="screen-frame">
+        <div class="screen-bar">
+          <div class="screen-dot"></div><div class="screen-dot"></div><div class="screen-dot"></div>
+          <div class="screen-url"></div>
+        </div>
+        <div class="screen-scroll"><img src="../images/About%20Us%20%281%29.png" alt="TenderConnect About Us hi-fi prototype" loading="lazy"></div>
+        <div class="screen-label">About Us — Prototype</div>
+      </div>
+      <div class="screen-frame">
+        <div class="screen-bar">
+          <div class="screen-dot"></div><div class="screen-dot"></div><div class="screen-dot"></div>
+          <div class="screen-url"></div>
+        </div>
+        <div class="screen-scroll"><img src="../images/Tenders.png" alt="TenderConnect Tender List hi-fi prototype" loading="lazy"></div>
+        <div class="screen-label">Tender List — Prototype</div>
+      </div>
+      <div class="screen-frame">
+        <div class="screen-bar">
+          <div class="screen-dot"></div><div class="screen-dot"></div><div class="screen-dot"></div>
+          <div class="screen-url"></div>
+        </div>
+        <div class="screen-scroll"><img src="../images/Profile%20%281%29.png" alt="TenderConnect User Profile hi-fi prototype" loading="lazy"></div>
+        <div class="screen-label">Profile — Prototype</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section">
+    <div class="section-label">06 · Build</div>
+    <h2 class="section-title">What we shipped</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h4>Landing &amp; Marketing Pages</h4>
+        <p>Public-facing pages to attract and inform potential business users about the platform.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Business Registration Flow</h4>
+        <p>Multi-step company onboarding with document upload and validation.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+        <h4>Tender Listings &amp; Filters</h4>
+        <p>Searchable, filterable directory of open tenders with deadline tracking.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h4>AI-Powered Chatbot</h4>
+        <p>Gemini AI integration to help users understand tender requirements and eligibility.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Admin Control Panel</h4>
+        <p>Full platform management: approve businesses, manage tenders, view analytics.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9c1.12 2.1 2.81 3.79 4.91 4.91l1.17-1.17a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h4>Notification System</h4>
+        <p>Real-time alerts for application status changes, new tenders, and deadlines.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem">
+      <div class="section-label">Tech Stack</div>
+      <div class="tech-pills">
+        <span class="tech-pill">HTML / CSS</span>
+        <span class="tech-pill">JavaScript</span>
+        <span class="tech-pill">Bootstrap</span>
+        <span class="tech-pill">C# .NET</span>
+        <span class="tech-pill">SQL Server</span>
+        <span class="tech-pill">AWS</span>
+        <span class="tech-pill secondary">Gemini AI</span>
+        <span class="tech-pill secondary">Figma</span>
+        <span class="tech-pill secondary">GitHub</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFLECTION -->
+  <section class="section">
+    <div class="section-label">07 · Reflect</div>
+    <h2 class="section-title">What I learned</h2>
+    <div class="reflection-grid">
+      <div class="reflection-card learned">
+        <h4>Key takeaways</h4>
+        <ul class="reflection-list">
+          <li>Design systems pay dividends — establishing tokens early meant the team built consistent UI without constant check-ins</li>
+          <li>Testing with teammates (not just the person who designed it) surfaced assumptions I didn't know I had</li>
+          <li>Role-based UX is fundamentally different work — each user type deserves its own design thinking, not just a filtered view</li>
+          <li>Collaboration between design and backend early prevents painful late-stage redesigns</li>
+        </ul>
+      </div>
+      <div class="reflection-card next">
+        <h4>If I were to revisit this</h4>
+        <ul class="reflection-list">
+          <li>Conduct user interviews with actual SME business owners before finalising the information architecture</li>
+          <li>Introduce accessibility testing earlier — colour contrast and keyboard navigation were addressed late</li>
+          <li>Add a mobile-first approach from the start — our initial designs were desktop-centric</li>
+          <li>Use a component library like shadcn or MUI for faster, more consistent frontend iteration</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- NEXT PROJECT -->
+<div class="next-project">
+  <p class="next-label">Next case study</p>
+  <h2 class="next-title">Lucky Pig Casino App</h2>
+  <a href="lucky-pig.html" class="next-btn">
+    View project
+    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb-overlay" id="lb" onclick="this.classList.remove('open')">
+  <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">&times;</button>
+  <img id="lb-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+<script>
+document.querySelectorAll('.screen-scroll img').forEach(function(img){
+  img.addEventListener('click',function(){
+    document.getElementById('lb-img').src=this.src;
+    document.getElementById('lb-img').alt=this.alt;
+    document.getElementById('lb').classList.add('open');
+  });
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lb').classList.remove('open')});
+</script>
+</body>
+</html>

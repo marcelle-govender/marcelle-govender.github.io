@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Pig — Case Study · Marcelle Govender</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D1B2A;--navy-mid:#1B2E44;--navy-light:#2A4060;
+  --gold:#C9A84C;--gold-light:#E8C96A;--gold-pale:#F5E9C4;
+  --purple:#3D1F5E;--purple-mid:#5C3085;
+  --cream:#F7F3EF;--cream-dark:#EDE6DF;
+  --grey:#6B7280;--charcoal:#1F1F1F;--white:#FFFFFF;
+  --coral:#E58B8B;
+  --radius-lg:20px;--radius-md:12px;--radius-sm:8px;
+  --shadow-sm:0 2px 12px rgba(13,27,42,.08);
+  --shadow-md:0 8px 32px rgba(13,27,42,.14);
+  --shadow-lg:0 20px 60px rgba(13,27,42,.22);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--charcoal);background:var(--white);line-height:1.6}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+.case-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 2.5rem;
+  background:rgba(13,27,42,.95);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(201,168,76,.2);
+}
+.back-btn{display:inline-flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:600;color:var(--gold-light);transition:color .2s;cursor:pointer}
+.back-btn:hover{color:var(--white)}
+.back-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.nav-title{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);font-weight:600}
+.nav-cta{font-size:.78rem;font-weight:600;padding:.45rem 1.1rem;border-radius:50px;background:var(--gold);color:var(--navy);transition:all .2s;cursor:pointer}
+.nav-cta:hover{background:var(--gold-light)}
+
+.case-hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--purple) 100%);
+  color:var(--white);padding:8rem 0 5rem;overflow:hidden;position:relative;
+}
+.hero-orb{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.15) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
+.hero-orb2{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(61,31,94,.4) 0%,transparent 70%);bottom:-50px;left:-50px;pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;padding:0 3rem;position:relative;z-index:1;display:grid;grid-template-columns:1fr 280px;gap:3rem;align-items:center}
+.hero-text{display:flex;flex-direction:column}
+.hero-phone-preview{position:relative;display:flex;justify-content:flex-end;align-items:flex-end;padding-top:2rem}
+.hero-phone-preview img{width:220px;border-radius:28px;border:3px solid rgba(201,168,76,.4);box-shadow:0 24px 60px rgba(0,0,0,.5);display:block}
+@media(max-width:768px){.hero-inner{grid-template-columns:1fr}.hero-phone-preview{display:none}}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--gold-light);display:inline-block}
+.hero-title{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;line-height:1.1;margin-bottom:1.2rem}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-subtitle{font-size:1.05rem;font-weight:300;opacity:.8;line-height:1.7;max-width:540px;margin-bottom:2rem}
+.hero-meta{display:flex;flex-wrap:wrap;gap:2.5rem}
+.hero-meta-item{display:flex;flex-direction:column;gap:.2rem}
+.hero-meta-label{font-size:.67rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.5}
+.hero-meta-value{font-size:.9rem;font-weight:500}
+
+.stats-strip{background:var(--navy);border-bottom:1px solid rgba(201,168,76,.2)}
+.stats-inner{max-width:1100px;margin:0 auto;padding:0 3rem;display:flex;align-items:stretch}
+.stat-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:1.75rem 1rem;border-right:1px solid rgba(255,255,255,.08)}
+.stat-item:last-child{border-right:none}
+.stat-number{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-label{font-size:.73rem;font-weight:500;color:rgba(255,255,255,.5);text-align:center}
+
+.content-body{max-width:1100px;margin:0 auto;padding:5rem 3rem}
+.section{margin-bottom:5rem}
+.section-label{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--purple-mid);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
+.section-label::after{content:'';flex:1;height:1px;background:var(--cream-dark)}
+.section-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--charcoal);margin-bottom:1.2rem;line-height:1.2}
+.section-body{font-size:1rem;color:var(--grey);line-height:1.8;max-width:700px}
+.section-body p+p{margin-top:1rem}
+
+.overview-grid{display:grid;grid-template-columns:1fr 300px;gap:3rem;align-items:start}
+.role-card{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:var(--white);border-radius:var(--radius-lg);padding:2rem;display:flex;flex-direction:column;gap:1.5rem;border:1px solid rgba(201,168,76,.2)}
+.role-card-item{display:flex;flex-direction:column;gap:.3rem}
+.role-card-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.5}
+.role-card-value{font-size:.9rem;font-weight:500}
+.role-card-value.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.2rem}
+.pill{font-size:.72rem;font-weight:600;padding:.25rem .65rem;border-radius:50px;background:rgba(201,168,76,.2);color:var(--gold-light);border:1px solid rgba(201,168,76,.3)}
+
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:2rem 0;border:1px solid var(--cream-dark);border-radius:var(--radius-lg);overflow:hidden}
+.process-step{padding:1.5rem 1.2rem;background:var(--white);border-right:1px solid var(--cream-dark);display:flex;flex-direction:column;gap:.5rem;transition:background .2s}
+.process-step:last-child{border-right:none}
+.process-step:hover{background:var(--cream)}
+.step-num{font-size:.65rem;font-weight:700;letter-spacing:.1em;color:var(--purple-mid);text-transform:uppercase}
+.step-name{font-size:.88rem;font-weight:600;color:var(--charcoal)}
+.step-desc{font-size:.75rem;color:var(--grey);line-height:1.5}
+
+.problem-card{background:linear-gradient(135deg,var(--navy) 0%,var(--purple) 100%);border-radius:var(--radius-lg);padding:3rem;position:relative;overflow:hidden;margin:2rem 0}
+.problem-card::before{content:'"';font-family:'Playfair Display',serif;font-size:12rem;line-height:1;color:var(--gold);opacity:.08;position:absolute;top:-2rem;left:1rem;font-weight:700}
+.problem-quote{font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;color:var(--gold-light);line-height:1.6;position:relative;z-index:1}
+
+.research-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2rem 0}
+.research-card{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--radius-md);padding:1.75rem;transition:box-shadow .2s}
+.research-card:hover{box-shadow:var(--shadow-md)}
+.research-icon{width:40px;height:40px;border-radius:var(--radius-sm);background:var(--gold-pale);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.research-icon svg{width:20px;height:20px;stroke:var(--navy);fill:none;stroke-width:2}
+.research-card h4{font-size:.92rem;font-weight:600;color:var(--charcoal);margin-bottom:.5rem}
+.research-card p{font-size:.82rem;color:var(--grey);line-height:1.6}
+
+.ds-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:2rem 0}
+.ds-card{background:var(--cream);border-radius:var(--radius-md);padding:1.75rem}
+.ds-card h4{font-size:.88rem;font-weight:600;color:var(--charcoal);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--cream-dark)}
+.color-swatch-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem}
+.color-swatch-sm{width:32px;height:32px;border-radius:6px;flex-shrink:0}
+.color-info{display:flex;flex-direction:column;gap:.1rem}
+.color-name{font-size:.8rem;font-weight:600;color:var(--charcoal)}
+.color-hex{font-size:.72rem;color:var(--grey);font-family:monospace}
+.type-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple-mid);margin-top:1.2rem;margin-bottom:.3rem;display:block}
+
+.challenge-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:2rem 0}
+.challenge-card{border-radius:var(--radius-md);padding:1.75rem;border:1px solid var(--cream-dark)}
+.challenge-card.problem{border-left:3px solid var(--coral)}
+.challenge-card.solution{border-left:3px solid var(--gold)}
+.challenge-badge{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;display:inline-block;padding:.2rem .6rem;border-radius:50px}
+.challenge-badge.p{background:rgba(229,139,139,.15);color:#c0504d}
+.challenge-badge.s{background:rgba(201,168,76,.15);color:#8a6d00}
+.challenge-card h4{font-size:.9rem;font-weight:600;color:var(--charcoal);margin-bottom:.5rem}
+.challenge-card p{font-size:.82rem;color:var(--grey);line-height:1.65}
+
+.decisions-list{display:flex;flex-direction:column;gap:1.5rem;margin:2rem 0}
+.decision-item{display:grid;grid-template-columns:48px 1fr;gap:1.25rem;align-items:start;padding:1.75rem;border:1px solid var(--cream-dark);border-radius:var(--radius-md);transition:box-shadow .2s}
+.decision-item:hover{box-shadow:var(--shadow-sm)}
+.decision-num{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--purple));color:var(--gold);font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.decision-content h4{font-size:.95rem;font-weight:600;color:var(--charcoal);margin-bottom:.4rem}
+.decision-content p{font-size:.85rem;color:var(--grey);line-height:1.7}
+.decision-tag{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--purple-mid);background:rgba(92,48,133,.08);padding:.2rem .6rem;border-radius:50px;margin-bottom:.5rem}
+
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin:2rem 0}
+.feature-card{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--radius-md);padding:1.5rem;transition:box-shadow .2s}
+.feature-card:hover{box-shadow:var(--shadow-md)}
+.feature-icon{width:36px;height:36px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--navy),var(--purple));display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+.feature-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:2}
+.feature-card h4{font-size:.88rem;font-weight:600;color:var(--charcoal);margin-bottom:.35rem}
+.feature-card p{font-size:.78rem;color:var(--grey);line-height:1.6}
+
+.gamification-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:2rem 0}
+.gamif-card{background:var(--navy);color:var(--white);border-radius:var(--radius-md);padding:1.5rem;text-align:center;border:1px solid rgba(201,168,76,.2)}
+.gamif-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--gold);margin-bottom:.75rem;display:block;line-height:1}
+.gamif-icon{width:44px;height:44px;margin:0 auto .85rem;color:var(--gold)}
+.gamif-icon svg{width:44px;height:44px;stroke:var(--gold)}
+.gamif-card h4{font-size:.85rem;font-weight:600;color:var(--gold-light);margin-bottom:.35rem}
+.gamif-card p{font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.5}
+
+.tech-pills{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.5rem 0}
+.tech-pill{font-size:.78rem;font-weight:600;padding:.35rem .85rem;border-radius:50px;background:var(--navy);color:var(--gold-light)}
+.tech-pill.secondary{background:var(--cream-dark);color:var(--charcoal)}
+
+.reflection-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}
+.reflection-card{border-radius:var(--radius-md);padding:1.75rem}
+.reflection-card.learned{background:linear-gradient(135deg,#1B2E44 0%,#0D1B2A 100%);color:var(--white)}
+.reflection-card.next{background:var(--gold-pale)}
+.reflection-card h4{font-size:.88rem;font-weight:700;margin-bottom:1rem}
+.reflection-card.learned h4{color:var(--gold)}
+.reflection-card.next h4{color:var(--navy)}
+.reflection-list{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.reflection-list li{font-size:.83rem;line-height:1.6;padding-left:1.2rem;position:relative}
+.reflection-card.learned .reflection-list li{color:rgba(255,255,255,.7)}
+.reflection-card.next .reflection-list li{color:var(--navy-mid)}
+.reflection-card.learned .reflection-list li::before{content:'→';position:absolute;left:0;color:var(--gold);font-weight:600}
+.reflection-card.next .reflection-list li::before{content:'→';position:absolute;left:0;color:var(--purple-mid);font-weight:600}
+
+.handwrite{font-family:'Caveat',cursive;font-size:1.3rem;color:var(--gold);display:block;margin-top:.5rem}
+
+.next-project{background:var(--navy);color:var(--white);padding:4rem 3rem;text-align:center;border-top:1px solid rgba(201,168,76,.2)}
+.next-label{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;opacity:.5;margin-bottom:.75rem}
+.next-title{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1.5rem;color:var(--gold)}
+.next-btn{display:inline-flex;align-items:center;gap:.6rem;font-weight:600;font-size:.9rem;padding:.8rem 2rem;border-radius:50px;background:var(--gold);color:var(--navy);transition:all .2s;cursor:pointer}
+.next-btn:hover{background:var(--gold-light)}
+.next-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ── PHONE GALLERY ── */
+.phone-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin:2rem 0}
+.phone-frame{background:var(--navy);border-radius:24px;overflow:hidden;border:2px solid rgba(201,168,76,.3);position:relative;display:flex;flex-direction:column;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.phone-notch{width:60px;height:8px;background:rgba(201,168,76,.2);border-radius:0 0 8px 8px;margin:6px auto 0;flex-shrink:0}
+.phone-frame .phone-scroll{width:100%;flex:1;overflow:hidden;position:relative}
+.phone-frame .phone-scroll img{width:100%;display:block;object-fit:cover;object-position:top 0%;transition:object-position 2.5s ease;height:100%}
+.phone-frame:hover .phone-scroll img{object-position:top 100%}
+.phone-label{font-size:.7rem;font-weight:600;color:var(--gold-light);text-align:center;padding:.5rem;background:rgba(0,0,0,.4);width:100%;letter-spacing:.05em;text-transform:uppercase}
+@media(max-width:900px){.phone-gallery{grid-template-columns:repeat(4,1fr);gap:.75rem}}
+@media(max-width:600px){.phone-gallery{grid-template-columns:repeat(2,1fr)}}
+
+html,body{overflow-x:hidden}
+@media(max-width:900px){
+  .hero-inner{padding:0 1.5rem}
+  .hero-title{font-size:2.4rem}
+  .overview-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .ds-grid,.reflection-grid{grid-template-columns:1fr}
+  .features-grid,.research-grid{grid-template-columns:1fr 1fr}
+  .gamification-grid{grid-template-columns:1fr 1fr}
+  .challenge-grid{grid-template-columns:1fr}
+  .stats-inner{flex-wrap:wrap;padding:0 1.5rem}
+  .stat-item{min-width:40%}
+  .content-body{padding:3rem 1.5rem}
+  .case-nav{padding:.7rem 1.2rem}
+  .phone-gallery{grid-template-columns:repeat(2,1fr);gap:1rem}
+  .next-project{padding:3rem 1.5rem}
+}
+@media(max-width:600px){
+  .features-grid,.research-grid,.process-steps,.gamification-grid{grid-template-columns:1fr}
+  .hero-title{font-size:1.9rem}
+  .nav-title{display:none}
+  .content-body{padding:2rem 1.25rem}
+  .section{margin-bottom:3rem}
+  .section-title{font-size:1.5rem}
+  .phone-gallery{grid-template-columns:repeat(2,1fr);gap:.75rem}
+  .phone-frame{border-radius:16px}
+  .decision-item{grid-template-columns:36px 1fr;gap:.75rem;padding:1.25rem}
+  .decision-num{width:36px;height:36px;font-size:.9rem}
+  .stats-strip{padding:1rem}
+  .stat-item{min-width:45%}
+  .stat-number{font-size:1.7rem}
+  .hero-meta{gap:1.25rem}
+  .back-btn span{display:none}
+  .problem-card{padding:2rem 1.5rem}
+  .problem-quote{font-size:1.1rem}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* ── LIGHTBOX ── */
+.lb-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);cursor:zoom-out;align-items:center;justify-content:center;padding:1.5rem}
+.lb-overlay.open{display:flex}
+.lb-overlay img{max-width:60vw;max-height:90vh;object-fit:contain;border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,.7);cursor:default;border:2px solid rgba(201,168,76,.3)}
+.lb-close{position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:#fff;font-size:2rem;line-height:1;cursor:pointer;opacity:.7;transition:opacity .2s}
+.lb-close:hover{opacity:1}
+.phone-scroll{cursor:zoom-in}
+</style>
+</head>
+<body>
+
+<nav class="case-nav">
+  <a href="../index.html" class="back-btn">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
+    Back to Portfolio
+  </a>
+  <span class="nav-title">Lucky Pig</span>
+  <a href="../index.html#contact" class="nav-cta">Work with me</a>
+</nav>
+
+<section class="case-hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag"><span class="hero-tag-dot"></span>Mobile UI/UX Design &amp; Frontend Development</div>
+      <h1 class="hero-title">Lucky <em>Pig</em>.</h1>
+      <p class="hero-subtitle">A gamified mobile casino app designed to make digital gambling entertaining, responsible, and visually compelling — built as a cross-platform .NET MAUI application.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Module</span>
+          <span class="hero-meta-value">PROG6212</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Year</span>
+          <span class="hero-meta-value">2025</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Team</span>
+          <span class="hero-meta-value">3 members</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Platform</span>
+          <span class="hero-meta-value">.NET MAUI (Mobile)</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-phone-preview">
+      <img src="../images/lp_landing.png" alt="Lucky Pig splash screen">
+    </div>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Casino games</span></div>
+    <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Gamification systems</span></div>
+    <div class="stat-item"><span class="stat-number">3</span><span class="stat-label">Team members</span></div>
+    <div class="stat-item"><span class="stat-number">MAUI</span><span class="stat-label">Cross-platform framework</span></div>
+    <div class="stat-item"><span class="stat-number">AI</span><span class="stat-label">Integrated dealer</span></div>
+  </div>
+</div>
+
+<div class="content-body">
+
+  <section class="section">
+    <div class="section-label">Overview</div>
+    <div class="overview-grid">
+      <div>
+        <h2 class="section-title">My role in this project</h2>
+        <div class="section-body">
+          <p>Lucky Pig was a cross-functional group project where I wore two hats: designing the mobile UI in Figma and implementing the frontend in .NET MAUI with C#. This project pushed me creatively because casino design has its own visual language — high contrast, rich textures, a sense of luxury and excitement — that I had to learn and execute within MAUI's component system.</p>
+          <p>Beyond aesthetics, I was responsible for the app's game interaction design: how players would feel winning, how to surface their progress, and how to make every interaction feel rewarding. That meant designing gamification systems, not just screens.</p>
+          <span class="handwrite">UI/UX + mobile frontend</span>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-card-item">
+          <span class="role-card-label">My Role</span>
+          <span class="role-card-value">UI/UX Designer &amp; Frontend Developer</span>
+        </div>
+        <div class="role-card-item">
+          <span class="role-card-label">Type</span>
+          <span class="role-card-value">Mobile Campus Group Project</span>
+        </div>
+        <div class="role-card-item">
+          <span class="role-card-label">Design Tools</span>
+          <div class="role-card-value tags"><span class="pill">Figma</span></div>
+        </div>
+        <div class="role-card-item">
+          <span class="role-card-label">Frontend Stack</span>
+          <div class="role-card-value tags">
+            <span class="pill">.NET MAUI</span>
+            <span class="pill">C#</span>
+            <span class="pill">XAML</span>
+          </div>
+        </div>
+        <div class="role-card-item">
+          <span class="role-card-label">Backend Stack</span>
+          <div class="role-card-value tags">
+            <span class="pill">C# .NET</span>
+            <span class="pill">SQL Server</span>
+            <span class="pill">Gemini AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Design Process</div>
+    <h2 class="section-title">From concept to mobile app</h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <span class="step-num">01</span>
+        <span class="step-name">Research</span>
+        <span class="step-desc">Casino UX patterns, gamification psychology, MAUI constraints</span>
+      </div>
+      <div class="process-step">
+        <span class="step-num">02</span>
+        <span class="step-name">Define</span>
+        <span class="step-desc">User flows, feature scope, game interaction models</span>
+      </div>
+      <div class="process-step">
+        <span class="step-num">03</span>
+        <span class="step-name">Design</span>
+        <span class="step-desc">Visual identity, wireframes, Figma high-fidelity screens</span>
+      </div>
+      <div class="process-step">
+        <span class="step-num">04</span>
+        <span class="step-name">Build</span>
+        <span class="step-desc">XAML layouts, game logic, gamification systems</span>
+      </div>
+      <div class="process-step">
+        <span class="step-num">05</span>
+        <span class="step-name">Reflect</span>
+        <span class="step-desc">Mobile-specific lessons, what worked and what didn't</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">01 · Research &amp; Define</div>
+    <h2 class="section-title">The design brief</h2>
+    <div class="problem-card">
+      <p class="problem-quote">"Build a casino mobile app that's engaging enough to keep users coming back — through game variety, rewards, and a visual experience that feels premium on a phone screen."</p>
+    </div>
+    <div class="section-body" style="margin-top:1.5rem">
+      <p>The challenge with casino UX is that you're fighting for attention in a space where every competitor uses the same vocabulary: neon lights, spinning reels, loud colours. My goal was to create something that felt luxurious and polished rather than garish — a casino you'd actually want to spend time in.</p>
+      <p>I spent time studying the UX patterns of successful gambling apps — how they handle session flow, how they surface wins, and critically, how they handle responsible gambling features without breaking the experience.</p>
+    </div>
+    <div class="research-grid" style="margin-top:2rem">
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h4>Layered Engagement</h4>
+        <p>Research showed that successful casino apps retain users through layered rewards — immediate feedback (win animations), short-term goals (daily spin), and long-term progression (leaderboard rank). I designed all three layers.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h4>MAUI Design Constraints</h4>
+        <p>.NET MAUI had specific constraints: no CSS gradients by default, limited animation APIs, and platform-specific rendering differences between Android and iOS. My designs had to be achievable within these limits.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h4>Responsible Design</h4>
+        <p>Gambling apps have an ethical dimension. I designed session time displays and deposit limits to be accessible but non-intrusive — present without being preachy, because they needed to actually get used.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">03 · Visual Design</div>
+    <h2 class="section-title">The Lucky Pig visual identity</h2>
+    <div class="section-body">
+      <p>I made a deliberate choice to go dark and premium rather than neon-garish. The palette draws from high-end physical casinos — deep navy, velvet purple, and gold accents. This positioned Lucky Pig as a sophisticated experience rather than a cheap mobile slot machine.</p>
+    </div>
+    <div class="ds-grid" style="margin-top:2rem">
+      <div class="ds-card">
+        <h4>Colour Palette</h4>
+        <div class="color-swatch-row">
+          <div class="color-swatch-sm" style="background:#0D1B2A"></div>
+          <div class="color-info"><span class="color-name">Casino Navy</span><span class="color-hex">#0D1B2A — Primary backgrounds</span></div>
+        </div>
+        <div class="color-swatch-row">
+          <div class="color-swatch-sm" style="background:#3D1F5E"></div>
+          <div class="color-info"><span class="color-name">Velvet Purple</span><span class="color-hex">#3D1F5E — Cards, surfaces</span></div>
+        </div>
+        <div class="color-swatch-row">
+          <div class="color-swatch-sm" style="background:#C9A84C"></div>
+          <div class="color-info"><span class="color-name">Casino Gold</span><span class="color-hex">#C9A84C — CTAs, wins, highlights</span></div>
+        </div>
+        <div class="color-swatch-row">
+          <div class="color-swatch-sm" style="background:#E8C96A"></div>
+          <div class="color-info"><span class="color-name">Light Gold</span><span class="color-hex">#E8C96A — Text on dark surfaces</span></div>
+        </div>
+        <div class="color-swatch-row">
+          <div class="color-swatch-sm" style="background:#F5E9C4;border:1px solid #e0d5b0"></div>
+          <div class="color-info"><span class="color-name">Pale Gold</span><span class="color-hex">#F5E9C4 — Subtle tinted backgrounds</span></div>
+        </div>
+      </div>
+      <div class="ds-card">
+        <h4>Typography &amp; Principles</h4>
+        <span class="type-label">Display</span>
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--navy);line-height:1">Playfair Display</div>
+        <p style="font-size:.75rem;color:var(--grey);margin-top:.4rem">Serif with luxury associations — used for game titles and win amounts to elevate the feel</p>
+        <span class="type-label">UI / Body</span>
+        <div style="font-size:1rem;color:var(--charcoal)">DM Sans</div>
+        <p style="font-size:.75rem;color:var(--grey);margin-top:.4rem">Clean and readable against dark backgrounds; consistent with the broader design system</p>
+        <span class="type-label">Contrast Rule</span>
+        <p style="font-size:.78rem;color:var(--grey);background:rgba(201,168,76,.1);padding:.75rem;border-radius:6px;margin-top:.5rem;border-left:3px solid var(--gold)">Gold on navy = 6.5:1 contrast ratio. Never place white text directly on purple tints — always add a dark navy overlay first.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">03 · Design Decisions</div>
+    <h2 class="section-title">Five choices that shaped Lucky Pig</h2>
+    <div class="decisions-list">
+      <div class="decision-item">
+        <div class="decision-num">1</div>
+        <div class="decision-content">
+          <span class="decision-tag">Onboarding</span>
+          <h4>Animated onboarding over a static welcome screen</h4>
+          <p>First impressions matter immensely in entertainment apps. I designed a multi-step animated onboarding that introduced the mascot, explained coins and chips, and previewed the game lobby — all before asking for registration details. This built excitement before commitment.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">2</div>
+        <div class="decision-content">
+          <span class="decision-tag">Game UX</span>
+          <h4>Distinct visual identity for each game</h4>
+          <p>Rather than a single dark theme across all five games, I gave each game its own accent colour and table texture while staying within the core palette. Slots felt electric, Blackjack felt premium, Russian Roulette felt tense. Players navigated by feel, not just by title.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">3</div>
+        <div class="decision-content">
+          <span class="decision-tag">Gamification</span>
+          <h4>Progress visibility at every screen, not just the profile</h4>
+          <p>Most apps bury achievement progress in a profile tab — players forget it exists. I surfaced level progress, current streak, and coin balance in the persistent navigation bar so users always knew how close they were to their next reward. This drove re-engagement between sessions.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">4</div>
+        <div class="decision-content">
+          <span class="decision-tag">AI Integration</span>
+          <h4>Gemini dealer as an in-game tutorial, not a separate feature</h4>
+          <p>We integrated Gemini AI as a virtual dealer. Rather than a separate "Help" section, I embedded the dealer contextually within game screens — appearing when a player hesitated or hit an unusual hand in Blackjack. This felt natural, not intrusive.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">5</div>
+        <div class="decision-content">
+          <span class="decision-tag">Feedback</span>
+          <h4>Win animations designed for emotional impact</h4>
+          <p>I prototyped three different win animation styles before settling on a gold coin particle effect with a brief scale punch on the win amount. The key was timing: too short felt anticlimactic, too long felt disruptive. We settled on 800ms — just enough to feel rewarding without interrupting momentum.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Gamification Design</div>
+    <h2 class="section-title">Keeping players engaged</h2>
+    <div class="section-body">
+      <p>Four distinct systems layered together to drive engagement at different timescales — from immediate (win animations) to long-term (leaderboard rank). Designing these as a system, not individual features, was key to making them feel coherent.</p>
+    </div>
+    <div class="gamification-grid">
+      <div class="gamif-card">
+        <div class="gamif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <h4>Achievement System</h4>
+        <p>Unlockable badges for milestones — first win, 10 games played, reaching Gold tier</p>
+      </div>
+      <div class="gamif-card">
+        <div class="gamif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+        <h4>Leaderboard</h4>
+        <p>Weekly rankings with tier icons. Players compete for prestige, not just coins</p>
+      </div>
+      <div class="gamif-card">
+        <div class="gamif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M12 3v9l4 4"/><path d="M21 3v5h-5"/><path d="M21 3l-5 5"/></svg></div>
+        <h4>Daily Spin</h4>
+        <p>Free daily reward wheel — creates a return habit outside of gambling sessions</p>
+      </div>
+      <div class="gamif-card">
+        <div class="gamif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m13 2-2 6.9H5l5.7 4.1-2.2 6.9L14 15l5.6 4-2.2-6.9L23 8h-6.1L13 2z"/></svg></div>
+        <h4>Streak Multiplier</h4>
+        <p>Consecutive win bonuses that compound — rewards skilled play and risk-taking</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Problem → Solution</div>
+    <h2 class="section-title">Key design challenges</h2>
+    <div class="challenge-grid">
+      <div class="challenge-card problem">
+        <span class="challenge-badge p">Challenge</span>
+        <h4>Dark UI is hard to keep accessible</h4>
+        <p>Deep navy and purple backgrounds made it easy to accidentally place text with insufficient contrast — especially with gold text on purple tints.</p>
+      </div>
+      <div class="challenge-card solution">
+        <span class="challenge-badge s">Solution</span>
+        <h4>Strict contrast checks in Figma</h4>
+        <p>I added contrast checking to my design process and settled on a minimum 5:1 ratio for all body text. Gold on navy consistently hit 6.5:1.</p>
+      </div>
+      <div class="challenge-card problem">
+        <span class="challenge-badge p">Challenge</span>
+        <h4>MAUI doesn't support CSS-style gradients natively</h4>
+        <p>My Figma designs relied heavily on layered gradients — not available out of the box in XAML without custom renderers.</p>
+      </div>
+      <div class="challenge-card solution">
+        <span class="challenge-badge s">Solution</span>
+        <h4>Custom gradient frames via overlapping elements</h4>
+        <p>I recreated gradients using overlapping transparent BoxViews and LinearGradientBrush — matching my designs closely without third-party libraries.</p>
+      </div>
+      <div class="challenge-card problem">
+        <span class="challenge-badge p">Challenge</span>
+        <h4>Russian Roulette had no visual tension</h4>
+        <p>Early designs of the game looked like any other — the high-stakes feel wasn't coming through in the UI.</p>
+      </div>
+      <div class="challenge-card solution">
+        <span class="challenge-badge s">Solution</span>
+        <h4>Red accent and countdown timer</h4>
+        <p>I introduced a red-dominant colour theme unique to that game and a visible countdown that builds tension as the "chamber" loads — players reported it felt genuinely tense.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP SCREENS -->
+  <section class="section">
+    <div class="section-label">App Screens</div>
+    <h2 class="section-title">The app in detail</h2>
+    <div class="section-body">
+      <p>From the animated splash screen to the game tables, every screen was designed in Figma and implemented in .NET MAUI. The dark, gold-accented palette stays consistent across all views — giving Lucky Pig a cohesive luxury casino identity.</p>
+    </div>
+    <div class="phone-gallery">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-scroll"><img src="../images/lp_landing.png" alt="Lucky Pig splash screen with pig mascot" loading="lazy"></div>
+        <span class="phone-label">Splash Screen</span>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-scroll"><img src="../images/lp_signup.png" alt="Lucky Pig sign up screen" loading="lazy"></div>
+        <span class="phone-label">Sign Up</span>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-scroll"><img src="../images/lp_home.png" alt="Lucky Pig home screen — game lobby" loading="lazy"></div>
+        <span class="phone-label">Game Lobby</span>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-scroll"><img src="../images/lp_blackjack.png" alt="Lucky Pig blackjack game screen" loading="lazy"></div>
+        <span class="phone-label">Blackjack</span>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-scroll"><img src="../images/lp_slots.png" alt="Lucky Pig slots game screen" loading="lazy"></div>
+        <span class="phone-label">Slots</span>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-scroll"><img src="../images/lp_roulette.png" alt="Lucky Pig roulette screen" loading="lazy"></div>
+        <span class="phone-label">Roulette</span>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-scroll"><img src="../images/lp_winnings.png" alt="Lucky Pig winnings screen" loading="lazy"></div>
+        <span class="phone-label">Winnings</span>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-scroll"><img src="../images/lp_bot.png" alt="Lucky Pig AI dealer chatbot screen" loading="lazy"></div>
+        <span class="phone-label">AI Dealer</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">04 · What we shipped</div>
+    <h2 class="section-title">Complete feature set</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Animated Onboarding</h4>
+        <p>Multi-step introduction with mascot animation and game preview carousel.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h4>5 Casino Games</h4>
+        <p>Slots, Blackjack, Russian Roulette, Lucky Spin, and Scratch Cards — each with unique UI.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h4>Loyalty &amp; Rewards</h4>
+        <p>Tiered loyalty system with exclusive perks — Bronze, Silver, Gold, Platinum.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h4>AI Dealer (Gemini)</h4>
+        <p>Contextual game tips and rule explanations powered by Gemini AI integration.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4>Leaderboard</h4>
+        <p>Weekly community rankings with animated position changes and tier icons.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h4>Responsible Gaming</h4>
+        <p>Session timer, deposit limits, and cool-down periods — accessible without friction.</p>
+      </div>
+    </div>
+    <div style="margin-top:2rem">
+      <div class="section-label">Tech Stack</div>
+      <div class="tech-pills">
+        <span class="tech-pill">.NET MAUI</span>
+        <span class="tech-pill">C#</span>
+        <span class="tech-pill">XAML</span>
+        <span class="tech-pill">SQL Server</span>
+        <span class="tech-pill secondary">Gemini AI</span>
+        <span class="tech-pill secondary">Figma</span>
+        <span class="tech-pill secondary">GitHub</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">05 · Reflect</div>
+    <h2 class="section-title">What Lucky Pig taught me</h2>
+    <div class="reflection-grid">
+      <div class="reflection-card learned">
+        <h4>Key takeaways</h4>
+        <ul class="reflection-list">
+          <li>Entertainment UX is emotion-first — every design decision must ask "how does this feel?" not just "does this work?"</li>
+          <li>MAUI frontend work sharpened my ability to translate visual designs into a constrained framework I hadn't used before</li>
+          <li>Gamification is most effective when it feels intrinsic — rewards should feel earned, not handed out</li>
+          <li>Dark UIs require more systematic thinking about contrast — I now check ratios at every step</li>
+        </ul>
+      </div>
+      <div class="reflection-card next">
+        <h4>What I'd do differently</h4>
+        <ul class="reflection-list">
+          <li>Prototype key micro-interactions (win animations, card flips) earlier — we finalised these too late in the process</li>
+          <li>Conduct usability testing with players who don't know the rules — familiarity blinded us to confusing moments</li>
+          <li>Design a consistent motion language for the whole app, not per-screen animations</li>
+          <li>Explore haptic feedback design — mobile casino apps live or die by touch feel, not just visuals</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="next-project">
+  <p class="next-label">Next case study</p>
+  <h2 class="next-title">Digital Junction</h2>
+  <a href="digital-junction.html" class="next-btn">
+    View project
+    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb-overlay" id="lb" onclick="this.classList.remove('open')">
+  <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">&times;</button>
+  <img id="lb-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+<script>
+document.querySelectorAll('.phone-scroll img').forEach(function(img){
+  img.addEventListener('click',function(){
+    document.getElementById('lb-img').src=this.src;
+    document.getElementById('lb-img').alt=this.alt;
+    document.getElementById('lb').classList.add('open');
+  });
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lb').classList.remove('open')});
+</script>
+</body>
+</html>
